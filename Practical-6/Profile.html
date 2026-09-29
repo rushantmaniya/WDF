@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>StudentHub - Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header,
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background: #ddd;
+        }
+
+        nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>StudentHub - Profiles</h1>
+    </header>
+    <nav>
+       <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="profile.html">Profile</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin.html">Admin</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+    <main>
+        <h2>Student Profiles</h2>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search by name..." oninput="render()">
+            <select id="filter" onchange="render()">
+                <option value="">All Departments</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+            </select>
+            <select id="sort" onchange="render()">
+                <option value="name">Sort by Name</option>
+                <option value="enrollment">Sort by Enrollment</option>
+            </select>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Enrollment</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="dataBody"></tbody>
+        </table>
+        <br>
+        <div id="pageControls"></div>
+    </main>
+    <footer>
+        <p>&copy; 2026 StudentHub</p>
+    </footer>
+
+    <script>
+        let data = [];
+        let page = 1;
+
+        fetch('profiles.json').then(res => res.json()).then(json => {
+            data = json;
+            render();
+        });
+
+        function render() {
+            let search = document.getElementById('search').value.toLowerCase();
+            let filter = document.getElementById('filter').value;
+            let sort = document.getElementById('sort').value;
+
+            // 1. Filter & Search
+            let filtered = data.filter(p =>
+                (p.name?.toLowerCase().includes(search) || p.enrollment?.toLowerCase().includes(search)) &&
+                (filter === "" || p.department === filter)
+            );
+
+            // 2. Sort
+            filtered.sort((a, b) =>
+                sort === 'name' ? a.name.localeCompare(b.name) : a.enrollment.localeCompare(b.enrollment)
+            );
+
+            // 3. Pagination (2 per page)
+            let totalPages = Math.ceil(filtered.length / 2) || 1;
+            if (page > totalPages) page = totalPages;
+            if (page < 1) page = 1;
+            let pagedData = filtered.slice((page - 1) * 2, page * 2);
+
+            // 4. Show Data
+            let html = "";
+            pagedData.forEach(p => {
+                html += `<tr>
+                    <td>${p.enrollment}</td>
+                    <td>${p.name}</td>
+                    <td>${p.department}</td>
+                    <td>${p.email}</td>
+                </tr>`;
+            });
+            document.getElementById('dataBody').innerHTML = html || '<tr><td colspan="4">No profiles found.</td></tr>';
+
+            // 5. Show Pagination Buttons
+            document.getElementById('pageControls').innerHTML = `
+                <button onclick="page--; render()" ${page === 1 ? 'disabled' : ''}>Prev</button>
+                Page ${page} of ${totalPages}
+                <button onclick="page++; render()" ${page === totalPages ? 'disabled' : ''}>Next</button>
+            `;
+        }
+    </script>
+</body>
+
+</html>

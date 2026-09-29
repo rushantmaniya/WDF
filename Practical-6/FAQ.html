@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>StudentHub - FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header,
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background: #ddd;
+        }
+
+        nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .faq-item h3 {
+            color: #003366;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>StudentHub - FAQ</h1>
+    </header>
+    <nav>
+            <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="events.html">Events</a>
+        <a href="profile.html">Profile</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin.html">Admin</a>
+        <a href="faq.html">FAQ</a>
+    </nav>
+    <main>
+        <h2>Frequently Asked Questions</h2>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search..." oninput="render()">
+            <select id="filter" onchange="render()">
+                <option value="">All Categories</option>
+                <option value="General">General</option>
+                <option value="Account">Account</option>
+                <option value="Academics">Academics</option>
+            </select>
+            <select id="sort" onchange="render()">
+                <option value="id">Default Order</option>
+                <option value="question">Sort by Question A-Z</option>
+            </select>
+        </div>
+        <div id="dataBody"></div>
+        <br>
+        <div id="pageControls"></div>
+    </main>
+    <footer>
+        <p>&copy; 2026 StudentHub</p>
+    </footer>
+
+    <script>
+        let data = [];
+        let page = 1;
+
+        fetch('faq.json').then(res => res.json()).then(json => {
+            data = json;
+            render();
+        });
+
+        function render() {
+            let search = document.getElementById('search').value.toLowerCase();
+            let filter = document.getElementById('filter').value;
+            let sort = document.getElementById('sort').value;
+
+            // 1. Filter & Search
+            let filtered = data.filter(q =>
+                (q.question?.toLowerCase().includes(search) || q.answer?.toLowerCase().includes(search)) &&
+                (filter === "" || q.category === filter)
+            );
+
+            // 2. Sort
+            filtered.sort((a, b) => sort === 'question' ? a.question.localeCompare(b.question) : a.id - b.id);
+
+            // 3. Pagination (3 per page)
+            let totalPages = Math.ceil(filtered.length / 3) || 1;
+            if (page > totalPages) page = totalPages;
+            if (page < 1) page = 1;
+            let pagedData = filtered.slice((page - 1) * 3, page * 3);
+
+            // 4. Show Data
+            let html = "";
+            pagedData.forEach(q => {
+                html += `<div class="faq-item">
+                    <h3>Q: ${q.question}</h3>
+                    <p>A: ${q.answer}</p>
+                    <small>Category: ${q.category}</small>
+                </div>`;
+            });
+            document.getElementById('dataBody').innerHTML = html || '<p>No FAQs found.</p>';
+
+            // 5. Show Pagination Buttons
+            document.getElementById('pageControls').innerHTML = `
+                <button onclick="page--; render()" ${page === 1 ? 'disabled' : ''}>Prev</button>
+                Page ${page} of ${totalPages}
+                <button onclick="page++; render()" ${page === totalPages ? 'disabled' : ''}>Next</button>
+            `;
+        }
+    </script>
+</body>
+
+</html>

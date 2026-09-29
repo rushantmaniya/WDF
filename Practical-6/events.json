@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2026-08-10",
+    "displayDate": "10 Aug 2026",
+    "event": "Web Development Workshop",
+    "venue": "Seminar Hall",
+    "type": "Workshop"
+  },
+  {
+    "date": "2026-08-18",
+    "displayDate": "18 Aug 2026",
+    "event": "Hackathon",
+    "venue": "Computer Lab",
+    "type": "Competition"
+  },
+  {
+    "date": "2026-08-25",
+    "displayDate": "25 Aug 2026",
+    "event": "Sports Day",
+    "venue": "College Ground",
+    "type": "Sports"
+  }
+]

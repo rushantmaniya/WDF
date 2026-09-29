@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What is StudentHub?",
+    "answer": "StudentHub is an online portal for managing attendance, assignments, results, notices, and student profiles.",
+    "category": "General"
+  },
+  {
+    "question": "How do I register?",
+    "answer": "Go to the Register page, fill in your details, and submit the registration form.",
+    "category": "Account"
+  },
+  {
+    "question": "How do I log in?",
+    "answer": "Open the Login page and enter your registered email and password.",
+    "category": "Account"
+  },
+  {
+    "question": "Where can I check my results?",
+    "answer": "You can view your results from the Dashboard after logging in.",
+    "category": "Academics"
+  }
+]

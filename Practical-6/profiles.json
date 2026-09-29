@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Rushant Maniya",
+    "enrollment": "25DCE055",
+    "department": "Computer Engineering",
+    "college": "DEPSTAR",
+    "semester": "3",
+    "email": "rushant2528@example.com",
+    "phone": "+91 8511288888",
+    "address": "Surat, Gujarat"
+  },
+  {
+    "id": 2,
+    "name": "Shreyansh kavad",
+    "enrollment": "25IT101",
+    "department": "Information Technology",
+    "college": "CSPIT",
+    "semester": "3",
+    "email": "kavad@example.com",
+    "phone": "+91 9876543210",
+    "address": "Surat, Gujarat"
+  },
+  {
+    "id": 3,
+    "name": "Jay patel",
+    "enrollment": "25CE101",
+    "department": "Computer Engineering",
+    "college": "DEPSTAR",
+    "semester": "3",
+    "email": "jay@example.com",
+    "phone": "+91 9123456780",
+    "address": "Surat, Gujarat"
+  }
+]
