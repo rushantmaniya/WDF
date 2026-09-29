@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub - Register</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+header {
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  text-align: center;
+  padding: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  margin: 12px;
+}
+
+main {
+  width: 40%;
+  margin: 30px auto;
+}
+
+section {
+  padding: 25px;
+  border-radius: 8px;
+  background: white;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form */
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 15px;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  border: none;
+  cursor: pointer;
+  background: #003366;
+  color: white;
+  padding: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>StudentHub Portal</h1>
+<p>Student Registration</p>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="register.html">Register</a>
+<a href="login.html">Login</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="events.html">Events</a>
+<a href="profile.html">Profile</a>
+<a href="contact.html">Contact</a>
+<a href="admin.html">Admin</a>
+<a href="faq.html">FAQ</a>
+</nav>
+
+<main>
+<section>
+
+<h2>Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your name">
+
+<label>Email</label>
+<input type="email" id="email" placeholder="Enter email">
+
+<label>Mobile Number</label>
+<input type="tel" id="mobile" maxlength="10" placeholder="Enter mobile number">
+
+<label>Password</label>
+<input type="password" id="password" placeholder="Enter password">
+
+<label>Confirm Password</label>
+<input type="password" id="confirm" placeholder="Re-enter password">
+
+<label>Course</label>
+<select id="course">
+<option value="">-- Select Course --</option>
+<option>Computer Engineering</option>
+<option>Information Technology</option>
+<option>Mechanical Engineering</option>
+<option>Civil Engineering</option>
+</select>
+
+<label>Year</label>
+<select id="year">
+<option value="">-- Select Year --</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+<label>Gender</label><br>
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<input type="radio" name="gender" value="Other"> Other
+<br><br>
+
+<input type="checkbox" id="terms"> I accept the terms and conditions
+<br><br>
+
+<input type="submit" value="Register">
+
+</form>
+
+</section>
+</main>
+
+<footer>
+<p>&copy; 2026 StudentHub Portal</p>
+</footer>
+
+<script>
+function validateForm() {
+
+  // Get values from the form
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var mobile = document.getElementById("mobile").value;
+  var password = document.getElementById("password").value;
+  var confirm = document.getElementById("confirm").value;
+  var course = document.getElementById("course").value;
+  var year = document.getElementById("year").value;
+  var gender = document.querySelector('input[name="gender"]:checked');
+  var terms = document.getElementById("terms").checked;
+
+  // Regular expressions
+var nameRegex   = /^[A-Za-z ]+$/;     // only letters and spaces
+var emailRegex  = /^\S+@\S+\.\S+$/;   // something@something.something
+var mobileRegex = /^[0-9]{10}$/;      // exactly 10 digits
+var passRegex   = /^.{6,}$/;          // at least 6 characters
+
+
+  // Check one by one
+  if (!nameRegex.test(name)) {
+    alert("Name must have 3-30 letters only.");
+    return false;
+  }
+  if (!emailRegex.test(email)) {
+    alert("Enter a valid email.");
+    return false;
+  }
+  if (!mobileRegex.test(mobile)) {
+    alert("Mobile must be 10 digits.");
+    return false;
+  }
+  if (!passRegex.test(password)) {
+    alert("Password needs 8+ characters with uppercase, lowercase, number and special symbol.");
+    return false;
+  }
+  if (password !== confirm) {
+    alert("Passwords do not match.");
+    return false;
+  }
+  if (course === "") {
+    alert("Please select a course.");
+    return false;
+  }
+  if (year === "") {
+    alert("Please select a year.");
+    return false;
+  }
+  if (gender === null) {
+    alert("Please select gender.");
+    return false;
+  }
+  if (!terms) {
+    alert("Please accept the terms and conditions.");
+    return false;
+  }
+
+  alert("Registration successful!");
+  return true;
+}
+</script>
+
+</body>
+</html>
