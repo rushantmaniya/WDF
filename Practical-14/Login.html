@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentHub - Login</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+header {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+nav {
+    text-align: center;
+    padding: 12px;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 12px;
+    color: #003366;
+    font-weight: bold;
+}
+
+main {
+    width: 35%;
+    margin: 40px auto;
+}
+
+section {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background: #003366;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.note {
+    background: #eef2f7;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>StudentHub Portal</h1>
+    <p>Student &amp; Admin Login</p>
+</header>
+
+<nav>
+    <a href="Home.html">Home</a>
+    <a href="register.html">Register</a>
+    <a href="Login.html">Login</a>
+    <a href="dashboard.php">Dashboard</a>
+</nav>
+
+<main>
+
+<section>
+
+    <h2>Login Form</h2>
+
+    <form action="login.php" method="POST">
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <label style="font-weight: normal;">
+            <input type="checkbox" name="remember"> Remember Me
+        </label>
+        <br>
+
+        <input type="submit" value="Login">
+
+    </form>
+
+    <p style="text-align: center; margin-top: 15px;">
+        Don't have an account? <a href="register.html">Register here</a>
+    </p>
+
+    <div class="note">
+        <b>Testing Logins:</b><br>
+        Admin: <code>admin@gmail.com</code> | Pass: <code>admin123</code><br>
+        Student: Use your registered account
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 StudentHub Portal</p>
+</footer>
+
+</body>
+</html>
